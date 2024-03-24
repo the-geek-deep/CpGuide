@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - frontend_data:/app/node_modules
+    networks:
+      - bridge_network
+
+
+  backend:
+    build:
+      context: ./backend
+
+    ports:
+      - "8000:8000"
+    volumes:
+      - backend_data:/app/staticfiles
+      - backend_data:/app/media
+    networks:
+      - bridge_network
+
+
+networks:
+  bridge_network:
+    driver: bridge
+      
+
+volumes:
+  frontend_data:
+  backend_data:
